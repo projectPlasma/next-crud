@@ -10,3 +10,11 @@ export const PUT = async (request, { params }) => {
 
   return NextResponse.json({ message: 'Topic updated' }, { status: 200 });
 };
+
+export const GET = async (request, { params }) => {
+  const { id } = params;
+  await connectMongoDB();
+  const topic = await Topic.findOne({ _id: id });
+
+  return NextResponse.json({ topic }, { status: 200 });
+};
